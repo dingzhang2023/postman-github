@@ -1,0 +1,927 @@
+{
+	"info": {
+		"_postman_id": "dcab58e2-1cba-4ca7-9099-e007e43e8b19",
+		"name": "wma-backendapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25491607-dcab58e2-1cba-4ca7-9099-e007e43e8b19"
+	},
+	"item": [
+		{
+			"name": "App Gateway DEV",
+			"item": [
+				{
+					"name": "Sign-up Flow API",
+					"item": [
+						{
+							"name": "Delete test card",
+							"id": "a0ae14da-7bf2-464c-89c0-965a633cc0e0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/delete/99354414030064?pin=6666",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"delete",
+										"99354414030064"
+									],
+									"query": [
+										{
+											"key": "pin",
+											"value": "6666"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Card PIN validation w/ test card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"cardPinValidationToken\", pm.response.json().result.cardPinValidationToken)\r",
+											""
+										],
+										"type": "text/javascript",
+										"id": "4bf39930-6963-4aa6-8590-d0aff4f7e5a6"
+									}
+								}
+							],
+							"id": "dcf1342d-ee85-47d0-938e-aa369c5afce4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardNumber\": \"99354414030058\",\r\n    \"pin\": \"6666\"\r\n}"
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/card/validation",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"card",
+										"validation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Verification Code w/o CardNumber",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"id": "0555ae70-416d-458a-ac91-b7361d337f01"
+									}
+								}
+							],
+							"id": "194dbfa8-3ff5-4811-8e02-e091dbc5c596",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \r\n    \"mobilePhoneNumber\": \"{{myPhone}}\",\r\n    \"cardPinValidationToken\": \"{{cardPinValidationToken}}\"\r\n}"
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/verification",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"verification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify SMS Verification Code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"verificationCodeToken\", pm.response.json().result.verificationCodeToken)\r",
+											"postman.setEnvironmentVariable(\"token\", pm.response.json().result.token)\r",
+											""
+										],
+										"type": "text/javascript",
+										"id": "2b4d8e56-aab8-43bc-84b0-6a8aebbc9a13"
+									}
+								}
+							],
+							"id": "747a6d64-2ee8-4fb5-88dc-d92f589f0bf3",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/verification?verificationCode=463671&mobilePhoneNumber={{myPhone}}",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"verification"
+									],
+									"query": [
+										{
+											"key": "verificationCode",
+											"value": "463671"
+										},
+										{
+											"key": "mobilePhoneNumber",
+											"value": "{{myPhone}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign-up",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"authToken\", pm.response.json().result.authToken)"
+										],
+										"type": "text/javascript",
+										"id": "78162278-00e0-442f-a054-d569f06e16a8"
+									}
+								}
+							],
+							"id": "444ce62c-0975-4b5d-b6da-61f4b4cc07e6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"displayName\": \"Test\",\r\n    \"password\": \"Test1234\",\r\n    \"cardNumber\": \"99354414030058\",\r\n    \"mobilePhoneNumber\": \"{{myPhone}}\",\r\n    \"cardPinValidationToken\": \"{{cardPinValidationToken}}\",\r\n    \"verificationCode\": \"463671\",\r\n    \"verificationCodeToken\": \"{{verificationCodeToken}}\",\r\n    \"deviceId\": \"{{mobileDeviceId}}\",\r\n    \"pnToken\": \"{{mobilePushNotificationToken}}\"\r\n}"
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/signup",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "abedb28d-3f43-4d40-8ddd-5029b3b5c7b6"
+				},
+				{
+					"name": "Forgot Password Flow API",
+					"item": [
+						{
+							"name": "Card PIN validation w/ disabled signup",
+							"id": "ec8f7acc-7cb8-4ec5-9e4d-1646a20e1804",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardNumber\": \"99354414030058\",\r\n     \"pin\": \"6666\",\r\n     \"signup\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/card/validation",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"card",
+										"validation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Verification Code w/ CardNumber",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"id": "0e7f1e2b-c67f-4fb9-8c06-c3c67096ecac"
+									}
+								}
+							],
+							"id": "17fcbe8e-1dc2-4aaa-8b45-5bf1efae5c0a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardNumber\": \"99354414030058\",\r\n    \"mobilePhoneNumber\": \"{{myPhone}}\"\r\n}"
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/verification",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"verification"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify SMS Verification Code",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable(\"verificationCodeToken\", pm.response.json().result.verificationCodeToken)"
+										],
+										"type": "text/javascript",
+										"id": "5793ed56-26a8-44be-99b4-630ab9076c16"
+									}
+								}
+							],
+							"id": "ad98b66b-35ec-4682-b5b1-ad01cae2f132",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/verification?verificationCode=952586&mobilePhoneNumber={{myPhone}}",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"verification"
+									],
+									"query": [
+										{
+											"key": "verificationCode",
+											"value": "952586"
+										},
+										{
+											"key": "mobilePhoneNumber",
+											"value": "{{myPhone}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change password (forgot)",
+							"id": "b69f86c4-47d8-40cd-a6b7-da08eb6e8c4b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardNumber\": \"99354414030058\",\r\n    \"password\": \"Test@b2c2\",\r\n    \"verificationCodeToken\": \"{{verificationCodeToken}}\"\r\n}"
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/users/password",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"users",
+										"password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "a8d66b2a-bf12-4a1a-a6a4-e1ca7e29183f"
+				},
+				{
+					"name": "Station",
+					"item": [
+						{
+							"name": "Search List of Stations",
+							"id": "2240a5a5-3ee7-4e10-b8ad-99d1a417c9e5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/stations/locations/nearest/list?address=toronto&latitude=51.056505494170395&longitude=-113.92808730123706",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"stations",
+										"locations",
+										"nearest",
+										"list"
+									],
+									"query": [
+										{
+											"key": "address",
+											"value": "toronto"
+										},
+										{
+											"key": "latitude",
+											"value": "51.056505494170395"
+										},
+										{
+											"key": "longitude",
+											"value": "-113.92808730123706"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search List of Stations In Radius",
+							"id": "f408baa7-704a-42ae-897c-4e25d54f4aee",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/stations/locations/nearest/list/in_radius?latitude=51.056505494170395&longitude=-113.92808730123706",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"stations",
+										"locations",
+										"nearest",
+										"list",
+										"in_radius"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "51.056505494170395",
+											"description": "center, calgary"
+										},
+										{
+											"key": "longitude",
+											"value": "-113.92808730123706",
+											"description": "center, calgary"
+										},
+										{
+											"key": "address",
+											"value": "calgary",
+											"disabled": true
+										},
+										{
+											"key": "radius",
+											"value": "1000",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nearest Station",
+							"id": "4e19e293-ef2b-4687-a9ca-f0f7dd6f245b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/stations/locations/nearest?latitude=51.05635397469224&longitude=-113.92802024655464",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"stations",
+										"locations",
+										"nearest"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "51.05635397469224",
+											"description": "calgary"
+										},
+										{
+											"key": "longitude",
+											"value": "-113.92802024655464",
+											"description": "calgary"
+										},
+										{
+											"key": "distanceRange",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Stations",
+							"id": "12deb498-4d3f-435a-9c71-9a4472af479d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"centerLat\": 49.20060656340857,\r\n    \"centerLng\": -89.9656549153287,\r\n    \"radius\": 10000,\r\n    \"address\": \"toronto\",\r\n    \"diesel\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/stations/locations/filters?latitude=51.172119140625&longitude=-113.94435",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"stations",
+										"locations",
+										"filters"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "51.172119140625",
+											"description": "calgary"
+										},
+										{
+											"key": "longitude",
+											"value": "-113.94435",
+											"description": "calgary"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Nearest Top List of Stations",
+							"id": "dc5fb9a0-ec07-4b0f-a09d-7b8c59e5448b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/stations/locations/nearest/top/list?latitude=51.056505494170395&longitude=-113.92808730123706",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"stations",
+										"locations",
+										"nearest",
+										"top",
+										"list"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "51.056505494170395",
+											"description": "calgary"
+										},
+										{
+											"key": "longitude",
+											"value": "-113.92808730123706",
+											"description": "calgary"
+										},
+										{
+											"key": "numberOfStations",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "distanceRange",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "latitude",
+											"value": "-24.855107802069885",
+											"description": "No driving distance response from google",
+											"disabled": true
+										},
+										{
+											"key": "longitude",
+											"value": "-67.21835875175525",
+											"description": "No driving distance response from google",
+											"disabled": true
+										},
+										{
+											"key": "latitude",
+											"value": "51.172119140625",
+											"disabled": true
+										},
+										{
+											"key": "longitude",
+											"value": "-113.94435",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Station by EntityId",
+							"id": "8ee15940-b7ca-43f4-9081-45ce8b6dd224",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://wma-dev.petro-canada.ca/backendapi/stations/locations/entityId/42379?latitude=51.056505494170395&longitude=-113.92808730123706",
+									"protocol": "https",
+									"host": [
+										"wma-dev",
+										"petro-canada",
+										"ca"
+									],
+									"path": [
+										"backendapi",
+										"stations",
+										"locations",
+										"entityId",
+										"42379"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "51.056505494170395"
+										},
+										{
+											"key": "longitude",
+											"value": "-113.92808730123706"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "6667026d-28dc-4b8a-ad09-1fccf894b805"
+				},
+				{
+					"name": "Login using password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"authToken\", pm.response.json().result.authToken)\r",
+									"postman.setEnvironmentVariable(\"cardNumber\", pm.response.json().result.cardNumber)"
+								],
+								"type": "text/javascript",
+								"id": "951f3221-742e-42f2-9ae0-2f8e75b11336"
+							}
+						}
+					],
+					"id": "fba9b1aa-cc84-460f-bbb2-24526829fb27",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"cardNumber\": \"99354414030058\",\r\n   \"password\": \"Test1234\",\r\n   \"deviceId\": \"{{mobileDeviceId}}\",\r\n   \"pnToken\": \"{{mobilePushNotificationToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wma-dev.petro-canada.ca/backendapi/users/login",
+							"protocol": "https",
+							"host": [
+								"wma-dev",
+								"petro-canada",
+								"ca"
+							],
+							"path": [
+								"backendapi",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login using refreshToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"authToken\", pm.response.json().result.authToken)\r",
+									"postman.setEnvironmentVariable(\"refreshToken\", pm.response.json().result.refreshToken)"
+								],
+								"type": "text/javascript",
+								"id": "cb35cc5f-9a80-4fda-8f48-818bc33dc0ab"
+							}
+						}
+					],
+					"id": "6d452c5f-75b6-4c02-863e-3109d205d8bb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"cardNumber\": \"99354414030058\",\r\n   \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wma-dev.petro-canada.ca/backendapi/users/login",
+							"protocol": "https",
+							"host": [
+								"wma-dev",
+								"petro-canada",
+								"ca"
+							],
+							"path": [
+								"backendapi",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"id": "6e2c0c83-fa6c-44c8-9579-9d44a0c85516",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"cardNumber\": \"99354414030058\",\r\n   \"deviceId\": \"{{mobileDeviceId}}\"  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wma-dev.petro-canada.ca/backendapi/users/logout",
+							"protocol": "https",
+							"host": [
+								"wma-dev",
+								"petro-canada",
+								"ca"
+							],
+							"path": [
+								"backendapi",
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"id": "96242f36-1e9e-4030-b80c-1047433dee40"
+							}
+						}
+					],
+					"id": "31162d22-cf26-47f6-a1ca-9bc575504039",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardNumber\": \"99354414030058\",\r\n    \"password\": \"Test1234\",\r\n    \"newPassword\": \"newpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://wma-dev.petro-canada.ca/backendapi/users/password/changes",
+							"protocol": "https",
+							"host": [
+								"wma-dev",
+								"petro-canada",
+								"ca"
+							],
+							"path": [
+								"backendapi",
+								"users",
+								"password",
+								"changes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1a6288e9-7c47-4133-b62c-23b253eb2010"
+		}
+	]
+}
