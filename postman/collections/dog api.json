@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "5acbcf83-22db-4bec-a94d-bf0d983f59f0",
+		"name": "dog api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25491607-5acbcf83-22db-4bec-a94d-bf0d983f59f0"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"id": "88d7a6e6-87ea-41a0-9ccd-adf17479eebc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{api_key}}",
+						"description": "Dog API key",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/breeds/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"breeds",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
