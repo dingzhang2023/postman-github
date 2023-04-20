@@ -7,49 +7,74 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
-			"id": "88d7a6e6-87ea-41a0-9ccd-adf17479eebc",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-api-key",
-						"value": "{{api_key}}",
-						"description": "Dog API key",
-						"type": "text"
-					},
-					{
-						"key": "",
-						"value": "",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Breeds",
+			"item": [
+				{
+					"name": "Get breed by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "27ad7ffc-1add-4f8f-a5a8-9dfc2d620e4e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response Data id equals to 2\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(2);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/v1/breeds/2",
-					"host": [
-						"{{base_url}}"
 					],
-					"path": [
-						"v1",
-						"breeds",
-						"2"
-					]
+					"id": "88d7a6e6-87ea-41a0-9ccd-adf17479eebc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"description": "Dog API key",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/breeds/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"breeds",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"id": "49741bc6-fb9b-4873-81cc-791225d06f4e"
 		}
 	]
 }
