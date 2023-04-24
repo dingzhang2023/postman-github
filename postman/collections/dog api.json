@@ -78,7 +78,37 @@
 		},
 		{
 			"name": "Votes",
-			"item": [],
+			"item": [
+				{
+					"name": "Get all votes",
+					"id": "97cb5dd8-7ac5-4a50-b26f-aa24a543928e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"description": "Dog API Keys",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/v1/votes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"votes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"id": "d77240b5-86d3-4883-a073-434f5ef8c6f5"
 		}
 	]
